@@ -38,15 +38,15 @@ puts "Got #{servers.size} servers"
 
 servers.each do |server|
   (1..4).each do |i|
-    puts "Connecting to #{server['host']}:#{server['port']}"
+    label = "#{server['host']}:#{server['port']}"
     begin
       start = Time.now
       r = Redis.new( url: server["url"], timeout: 1 )
       r.ping
-      puts "Successful: (#{Time.now-start}s)"
+      puts "SUCCESS\t#{label}\t#{Time.now-start}"
       r.quit
     rescue
-      puts "Failed: #{$!.inspect}"
+      puts "FAILED\t#{label}\t#{$!.inspect}"
     end
   end
 end
