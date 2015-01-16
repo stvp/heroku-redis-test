@@ -15,6 +15,7 @@ $count = ENV["COUNT"]
 $api_url = ENV["API_URL"]
 $api_token = ENV["API_TOKEN"]
 $api_accept = ENV["API_ACCEPT"]
+$timeout = ENV["TIMEOUT"].to_i
 
 #
 # Fetch servers
@@ -44,7 +45,7 @@ $servers.each do |server|
     label = "#{server['host']}:#{server['port']}"
     begin
       start = Time.now
-      r = Redis.new( url: server["url"], timeout: 1 )
+      r = Redis.new( url: server["url"], timeout: $timeout )
       r.ping
       puts "SUCCESS\t#{label}\t#{Time.now-start}"
       r.quit
