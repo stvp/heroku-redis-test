@@ -32,7 +32,7 @@ if rand > 0.5
   })
   $servers = JSON.parse( response.body )
 
-  puts "FETCHED\thttparty\t#{$servers.count} servers\t${Time.now-start}"
+  puts "FETCHED\thttparty\t#{$servers.count} servers\t#{Time.now-start}"
 else
   require 'uri'
   require 'net/http'
