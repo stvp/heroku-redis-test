@@ -42,7 +42,7 @@ puts "FETCHED\t#{$servers.count}\t#{Time.now-start}"
 
 $servers.each do |server|
   (1..4).each do |i|
-    label = "#{server['host']}:#{server['port']}"
+    label = "#{server['host']}:#{server['port']}\t#{server['az']}\t#{server['aws_id']}"
     begin
       start = Time.now
       r = Redis.new( url: server["url"], timeout: $timeout )
@@ -50,7 +50,7 @@ $servers.each do |server|
       puts "SUCCESS\t#{label}\t#{Time.now-start}"
       r.quit
     rescue
-      puts "FAILED\t#{label}\t#{$!.inspect}"
+      puts "FAILED\t#{label}\t#{$!.inspect}\t#{Time.now-start}"
     end
   end
 end
